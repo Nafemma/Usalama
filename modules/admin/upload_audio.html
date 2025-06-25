@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Voice Tip - Usalama</title>
+</head>
+<body>
+    <h2>🎤 Upload Voice Tip</h2>
+    <nav>
+        <a href="admin_dashboard.html">Back to Dashboard</a> |
+        <a href="logout.html">Logout</a>
+    </nav>
+
+    <hr>
+
+    <form action="/upload_audio" method="post" enctype="multipart/form-data">
+        <label for="week">Week Number:</label><br>
+        <input type="number" name="week" id="week" required><br><br>
+
+        <label for="language">Language:</label><br>
+        <select name="language" id="language" required>
+            <option value="english">English</option>
+            <option value="chichewa">Chichewa</option>
+        </select><br><br>
+
+        <label for="audio">Select Audio File (.mp3):</label><br>
+        <input type="file" name="audio" id="audio" accept=".mp3" required><br><br>
+
+        <input type="submit" value="Upload">
+    </form>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2025 Usalama</p>
+    </footer>
+</body>
+</html>

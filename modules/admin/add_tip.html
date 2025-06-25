@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Weekly Tip - Usalama</title>
+</head>
+<body>
+    <h2>➕ Add Weekly Health Tip</h2>
+    <nav>
+        <a href="admin_dashboard.html">Back to Dashboard</a> |
+        <a href="logout.html">Logout</a>
+    </nav>
+
+    <hr>
+
+    <form action="/add_tip" method="post">
+        <label for="week">Week Number:</label><br>
+        <input type="number" name="week" id="week" required><br><br>
+
+        <label for="tip">Health Tip:</label><br>
+        <textarea name="tip" id="tip" rows="5" cols="40" required></textarea><br><br>
+
+        <label for="language">Language:</label><br>
+        <select name="language" id="language" required>
+            <option value="english">English</option>
+            <option value="chichewa">Chichewa</option>
+        </select><br><br>
+
+        <input type="submit" value="Add Tip">
+    </form>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2025 Usalama</p>
+    </footer>
+</body>
+</html>
