@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload Voice Tip - Usalama</title>
+    <title>Upload Voice Tips - Usalama</title>
 </head>
 <body>
     <h2>🎤 Upload Voice Tip</h2>
@@ -13,8 +13,21 @@
     <hr>
 
     <form action="/upload_audio" method="post" enctype="multipart/form-data">
-        <label for="week">Week Number:</label><br>
-        <input type="number" name="week" id="week" required><br><br>
+        <label>Audio Type:</label><br>
+        <input type="radio" name="type" value="week" checked onclick="toggleUploadFields()"> Weekly Tip<br>
+        <input type="radio" name="type" value="keyword" onclick="toggleUploadFields()"> Keyword-based Tip<br><br>
+
+        <!-- Week Upload -->
+        <div id="week-section">
+            <label for="week">Week Number:</label><br>
+            <input type="number" name="week" id="week"><br><br>
+        </div>
+
+        <!-- Keyword Upload -->
+        <div id="keyword-section" style="display: none;">
+            <label for="keyword">Keyword (e.g. headache, nausea):</label><br>
+            <input type="text" name="keyword" id="keyword"><br><br>
+        </div>
 
         <label for="language">Language:</label><br>
         <select name="language" id="language" required>
@@ -25,8 +38,16 @@
         <label for="audio">Select Audio File (.mp3):</label><br>
         <input type="file" name="audio" id="audio" accept=".mp3" required><br><br>
 
-        <input type="submit" value="Upload">
+        <input type="submit" value="Upload Audio">
     </form>
+
+    <script>
+        function toggleUploadFields() {
+            const type = document.querySelector('input[name="type"]:checked').value;
+            document.getElementById('week-section').style.display = (type === 'week') ? 'block' : 'none';
+            document.getElementById('keyword-section').style.display = (type === 'keyword') ? 'block' : 'none';
+        }
+    </script>
 
     <footer>
         <hr>
