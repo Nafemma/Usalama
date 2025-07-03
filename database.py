@@ -10,60 +10,25 @@ try:
 except Exception as e:
     print(" Failed to connect:", e)
 
-# MOthers TABLE
+# USERS TABLE (Mothers, Partners, Admins)
 try:
     sql.execute('''
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            full_name TEXT,
-            username TEXT UNIQUE,
-            email TEXT,
-            phone TEXT,
-            password TEXT,
-            due_date TEXT,
-            language TEXT
-        )
-    ''')
-    print(" 'users' table created successfully.")
-except Exception as e:
-    print(" Error creating 'users' table:", e)
-
-
-
-# ADMINS TABLE
-try:
-    sql.execute('''
-        CREATE TABLE IF NOT EXISTS admins (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            email TEXT,
-            phone TEXT,
-            password TEXT NOT NULL
-        )
-    ''')
-    print("✅ 'admins' table created successfully.")
-except Exception as e:
-    print("❌ Error creating 'admins' table:", e)
-
-
-# PARTNERS TABLE
-try:
-    sql.execute('''
-        CREATE TABLE IF NOT EXISTS partners (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             full_name TEXT NOT NULL,
             username TEXT UNIQUE NOT NULL,
             email TEXT,
             phone TEXT,
             password TEXT NOT NULL,
-            linked_mother_username TEXT,
-            FOREIGN KEY(linked_mother_username) REFERENCES users(username)
+            role TEXT NOT NULL, -- mother, partner, admin
+            linked_mother_username TEXT, -- for partners only
+            due_date TEXT, -- for mothers only
+            language TEXT
         )
     ''')
-    print("✅ 'partners' table created successfully.")
+    print("✅ 'users' table created successfully.")
 except Exception as e:
-    print("❌ Error creating 'partners' table:", e)
-
+    print("❌ Error creating 'users' table:", e)
 
 
 
