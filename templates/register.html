@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register - Usalama</title>
+    <title>Usalama - Register</title>
 </head>
 <body>
-    <h2>Register</h2>
-    <nav>
-        <a href="index.html">Home</a>
-    </nav>
+    <h2>Register on Usalama</h2>
 
-    <form action="/register" method="post">
-        <label for="full_name">Full Name:</label><br>
-        <input type="text" name="full_name" id="full_name" required><br><br>
+    <form action="/register" method="POST">
+        <label>Full Name:</label><br>
+        <input type="text" name="full_name" required><br><br>
 
-        <label for="username">Username:</label><br>
-        <input type="text" name="username" id="username" required><br><br>
+        <label>Username:</label><br>
+        <input type="text" name="username" required><br><br>
 
-        <label for="email">Email Address:</label><br>
-        <input type="email" name="email" id="email" required><br><br>
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
 
-        <label for="phone">Phone Number:</label><br>
-        <input type="text" name="phone" id="phone" required><br><br>
+        <label>Phone Number:</label><br>
+        <input type="text" name="phone" required><br><br>
 
-        <label for="password">Create a Password:</label><br>
-        <input type="password" name="password" id="password" required><br><br>
+        <label>Password:</label><br>
+        <input type="password" name="password" required><br><br>
 
-        <label for="role">I am a:</label><br>
-        <select name="role" id="role" required onchange="toggleDueDateField(this.value)">
-            <option value="">--Select Role--</option>
+        <label>Role:</label><br>
+        <select name="role" required>
             <option value="mother">Mother</option>
             <option value="partner">Partner</option>
-            <option value="admin">Admin</option>
         </select><br><br>
 
-        <div id="due-date-field" style="display: none;">
-            <label for="due_date">Due Date:</label><br>
-            <input type="date" name="due_date" id="due_date"><br><br>
-        </div>
+        <label>Due Date (for mothers):</label><br>
+        <input type="date" name="due_date"><br><br>
 
-        <label for="language">Preferred Language:</label><br>
-        <select name="language" id="language" required>
+        <label>If Partner, link to Mother Username:</label><br>
+        <input type="text" name="linked_mother_username"><br><br>
+
+        <label>Preferred Language:</label><br>
+        <select name="language">
             <option value="english">English</option>
             <option value="chichewa">Chichewa</option>
         </select><br><br>
 
         <input type="submit" value="Register">
     </form>
-
-    <script>
-        function toggleDueDateField(role) {
-            const dueField = document.getElementById('due-date-field');
-            dueField.style.display = (role === 'mother') ? 'block' : 'none';
-        }
-    </script>
 </body>
 </html>

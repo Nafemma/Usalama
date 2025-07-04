@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Audio Tips - Admin</title>
+</head>
+<body>
+    <h2>Uploaded Audio Tips</h2>
+
+    {% if audio_tips %}
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Week</th>
+                <th>Keyword</th>
+                <th>Language</th>
+                <th>Audio</th>
+            </tr>
+            {% for tip in audio_tips %}
+            <tr>
+                <td>{{ tip[0] }}</td>
+                <td>{{ tip[1] }}</td>
+                <td>{{ tip[2] or 'N/A' }}</td>
+                <td>{{ tip[3] or 'N/A' }}</td>
+                <td>{{ tip[4] }}</td>
+                <td>
+                    <!-- ✅ Fix: remove split() if you're storing just the filename -->
+                    <audio controls>
+                        <source src="{{ url_for('get_audio', filename=tip[5]) }}" type="audio/mpeg">
+                        Your browser does not support the audio tag.
+                    </audio>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No audio tips uploaded yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">⬅ Back to Dashboard</a>
+</body>
+</html>
