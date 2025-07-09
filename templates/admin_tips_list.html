@@ -1,0 +1,552 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #fde2e4, #f9c5d1);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      margin-top: 40px;
+    }
+    h1 {
+      color: #d6336c;
+      margin-bottom: 16px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #d6336c;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b02a52;
+    }
+    .tip {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #333;
+    }
+    .admin-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+      margin: 40px auto;
+    }
+    .admin-section h2 {
+      color: #6a1b4d;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .category {
+      margin-bottom: 20px;
+    }
+    .category h3 {
+      color: #b02a52;
+      margin-bottom: 8px;
+    }
+    .category ul {
+      padding-left: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pregnancy Health Tips</h1>
+    <input type="number" id="weekInput" placeholder="Enter your pregnancy week" min="1" max="40" />
+    <button onclick="showTip()">Get Health Tip</button>
+    <div id="tip" class="tip"></div>
+  </div>
+
+  <div class="admin-section">
+    <h2>Admin: All Tips by Trimester</h2>
+    <div class="category">
+      <h3>First Trimester</h3>
+      <ul>
+        <li>Take prenatal vitamins and drink water.</li>
+        <li>Eat healthy</li>
+        <li>Book your first prenatal appointment.</li>
+        <li>Eat small, frequent meals to fight nausea.</li>
+      </ul>
+    </div>
+    <div class="category">
+      <h3>Second Trimester</h3>
+      <ul>
+        <li>Time for a mid-pregnancy scan!</li>
+        <li>Continue light exercise.</li>
+        <li>Talk to your doctor about baby movements.</li>
+      </ul>
+    </div>
+    <div class="category">
+      <h3>Third Trimester</h3>
+      <ul>
+        <li>Begin practicing relaxation and breathing.</li>
+        <li>Start packing your hospital bag.</li>
+        <li>Review your birth plan with your doctor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const TIPS = {
+      "First Trimester": {
+        tips: [
+          "Take prenatal vitamins and drink water.",
+          "Eat healthy",
+          "Book your first prenatal appointment.",
+          "Eat small, frequent meals to fight nausea."
+        ]
+      },
+      "Second Trimester": {
+        tips: [
+          "Time for a mid-pregnancy scan!",
+          "Continue light exercise.",
+          "Talk to your doctor about baby movements."
+        ]
+      },
+      "Third Trimester": {
+        tips: [
+          "Begin practicing relaxation and breathing.",
+          "Start packing your hospital bag.",
+          "Review your birth plan with your doctor."
+        ]
+      }
+    };
+
+    function getHealthTip(weekNumber) {
+      let trimester = "";
+      if (weekNumber < 13) {
+        trimester = "First Trimester";
+      } else if (weekNumber < 27) {
+        trimester = "Second Trimester";
+      } else {
+        trimester = "Third Trimester";
+      }
+
+      const tipList = TIPS[trimester]?.tips || [];
+      if (tipList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * tipList.length);
+        return tipList[randomIndex];
+      } else {
+        return "Stay positive and follow medical advice.";
+      }
+    }
+
+    function showTip() {
+      const week = document.getElementById("weekInput").value;
+      const tip = getHealthTip(Number(week));
+      document.getElementById("tip").innerText = tip;
+    }
+  </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #fde2e4, #f9c5d1);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container, .admin-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      margin-top: 40px;
+    }
+    h1, h2 {
+      color: #d6336c;
+      text-align: center;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input[type="number"], select {
+      width: 200px;
+    }
+    button {
+      background-color: #d6336c;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b02a52;
+    }
+    .tip {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pregnancy Health Tips</h1>
+    <input type="number" id="weekInput" placeholder="Enter your pregnancy week" min="1" max="40" />
+    <button onclick="showTip()">Get Health Tip</button>
+    <div id="tip" class="tip"></div>
+  </div>
+
+  <div class="admin-section">
+    <h2>Admin: Manage Tips</h2>
+    <div>
+      <select id="trimesterSelect">
+        <option value="First Trimester">First Trimester</option>
+        <option value="Second Trimester">Second Trimester</option>
+        <option value="Third Trimester">Third Trimester</option>
+      </select>
+      <input type="text" id="newTipInput" placeholder="Enter new tip" />
+      <button onclick="addTip()">Add Tip</button>
+    </div>
+    <table id="tipsTable">
+      <thead>
+        <tr>
+          <th>Trimester</th>
+          <th>Tip</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const TIPS = {
+      "First Trimester": [
+        "Take prenatal vitamins and drink water.",
+        "Eat healthy",
+        "Book your first prenatal appointment.",
+        "Eat small, frequent meals to fight nausea."
+      ],
+      "Second Trimester": [
+        "Time for a mid-pregnancy scan!",
+        "Continue light exercise.",
+        "Talk to your doctor about baby movements."
+      ],
+      "Third Trimester": [
+        "Begin practicing relaxation and breathing.",
+        "Start packing your hospital bag.",
+        "Review your birth plan with your doctor."
+      ]
+    };
+
+    function getHealthTip(weekNumber) {
+      let trimester = "";
+      if (weekNumber < 13) trimester = "First Trimester";
+      else if (weekNumber < 27) trimester = "Second Trimester";
+      else trimester = "Third Trimester";
+
+      const tipList = TIPS[trimester] || [];
+      if (tipList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * tipList.length);
+        return tipList[randomIndex];
+      } else {
+        return "Stay positive and follow medical advice.";
+      }
+    }
+
+    function showTip() {
+      const week = document.getElementById("weekInput").value;
+      const tip = getHealthTip(Number(week));
+      document.getElementById("tip").innerText = tip;
+    }
+
+    function renderTable() {
+      const tbody = document.querySelector("#tipsTable tbody");
+      tbody.innerHTML = "";
+      for (const trimester in TIPS) {
+        TIPS[trimester].forEach((tip, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${trimester}</td>
+            <td><input type="text" value="${tip}" onchange="editTip('${trimester}', ${index}, this.value)" /></td>
+            <td><button onclick="deleteTip('${trimester}', ${index})">Delete</button></td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+    }
+
+    function addTip() {
+      const trimester = document.getElementById("trimesterSelect").value;
+      const newTip = document.getElementById("newTipInput").value.trim();
+      if (newTip) {
+        TIPS[trimester].push(newTip);
+        document.getElementById("newTipInput").value = "";
+        renderTable();
+      }
+    }
+
+    function deleteTip(trimester, index) {
+      TIPS[trimester].splice(index, 1);
+      renderTable();
+    }
+
+    function editTip(trimester, index, newText) {
+      TIPS[trimester][index] = newText;
+    }
+
+    renderTable();
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #fde2e4, #f9c5d1);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container, .admin-section {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      margin-top: 40px;
+    }
+    h1, h2 {
+      color: #d6336c;
+      text-align: center;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 8px 4px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #d6336c;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b02a52;
+    }
+    .tip {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #333;
+    }
+    details {
+      margin-top: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #fff0f5;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 18px;
+      color: #d6336c;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pregnancy Health Tips</h1>
+    <input type="number" id="weekInput" placeholder="Enter your pregnancy week" min="1" max="40" />
+    <button onclick="showTip()">Get Health Tip</button>
+    <div id="tip" class="tip"></div>
+  </div>
+
+  <div class="admin-section">
+    <h2>Admin: Manage Tips</h2>
+    <div>
+      <select id="trimesterSelect">
+        <option value="First Trimester">First Trimester</option>
+        <option value="Second Trimester">Second Trimester</option>
+        <option value="Third Trimester">Third Trimester</option>
+      </select>
+      <input type="text" id="newTipInput" placeholder="Enter new tip" />
+      <button onclick="addTip()">Add Tip</button>
+    </div>
+
+    <div id="accordion"></div>
+  </div>
+
+  <script>
+    const TIPS = {
+      "First Trimester": [
+        "Take prenatal vitamins and drink water.",
+        "Eat healthy",
+        "Book your first prenatal appointment.",
+        "Eat small, frequent meals to fight nausea."
+      ],
+      "Second Trimester": [
+        "Time for a mid-pregnancy scan!",
+        "Continue light exercise.",
+        "Talk to your doctor about baby movements."
+      ],
+      "Third Trimester": [
+        "Begin practicing relaxation and breathing.",
+        "Start packing your hospital bag.",
+        "Review your birth plan with your doctor."
+      ]
+    };
+
+    function getHealthTip(weekNumber) {
+      let trimester = "";
+      if (weekNumber < 13) trimester = "First Trimester";
+      else if (weekNumber < 27) trimester = "Second Trimester";
+      else trimester = "Third Trimester";
+
+      const tipList = TIPS[trimester] || [];
+      if (tipList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * tipList.length);
+        return tipList[randomIndex];
+      } else {
+        return "Stay positive and follow medical advice.";
+      }
+    }
+
+    function showTip() {
+      const week = document.getElementById("weekInput").value;
+      const tip = getHealthTip(Number(week));
+      document.getElementById("tip").innerText = tip;
+    }
+
+    function renderAccordion() {
+      const accordion = document.getElementById("accordion");
+      accordion.innerHTML = "";
+
+      for (const trimester in TIPS) {
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = trimester;
+
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        thead.innerHTML = `<tr><th>Tip</th><th>Actions</th></tr>`;
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        TIPS[trimester].forEach((tip, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td><input type="text" value="${tip}" onchange="editTip('${trimester}', ${index}, this.value)" /></td>
+            <td><button onclick="deleteTip('${trimester}', ${index})">Delete</button></td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        details.appendChild(summary);
+        details.appendChild(table);
+        accordion.appendChild(details);
+      }
+    }
+
+    function addTip() {
+      const trimester = document.getElementById("trimesterSelect").value;
+      const newTip = document.getElementById("newTipInput").value.trim();
+      if (newTip) {
+        TIPS[trimester].push(newTip);
+        document.getElementById("newTipInput").value = "";
+        renderAccordion();
+      }
+    }
+
+    function deleteTip(trimester, index) {
+      TIPS[trimester].splice(index, 1);
+      renderAccordion(); 
+    }
+
+    function editTip(trimester, index, newText) {
+      TIPS[trimester][index] = newText;
+    }
+
+    renderAccordion();
+  </script>
+</body>
+</html>

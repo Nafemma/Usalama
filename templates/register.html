@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Usalama - Register</title>
+</head>
+<body>
+    <h2>Register on Usalama</h2>
+
+    <form action="/register" method="POST">
+        <label>Full Name:</label><br>
+        <input type="text" name="full_name" required><br><br>
+
+        <label>Username:</label><br>
+        <input type="text" name="username" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Phone Number:</label><br>
+        <input type="text" name="phone" required><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" required><br><br>
+
+        <label>Role:</label><br>
+        <select name="role" required>
+            <option value="mother">Mother</option>
+            <option value="partner">Partner</option>
+        </select><br><br>
+
+        <label>Due Date (for mothers):</label><br>
+        <input type="date" name="due_date"><br><br>
+
+        <label>If Partner, link to Mother Username:</label><br>
+        <input type="text" name="linked_mother_username"><br><br>
+
+        <label>Preferred Language:</label><br>
+        <select name="language">
+            <option value="english">English</option>
+            <option value="chichewa">Chichewa</option>
+        </select><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

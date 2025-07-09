@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Audio Tip</title>
+</head>
+<body>
+    <h2>Upload Audio Tip</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Tip Type:</label><br>
+        <select name="tip_type" required>
+            <option value="weekly">Weekly</option>
+            <option value="ondemand">On-demand</option>
+        </select><br><br>
+
+        <label>Week Number (if Weekly):</label><br>
+        <input type="number" name="week_number" min="1"><br><br>
+
+        <label>Keyword (if On-demand):</label><br>
+        <input type="text" name="keyword"><br><br>
+
+        <label>Language:</label><br>
+        <input type="text" name="language" required><br><br>
+
+        <label>Audio File (.mp3 or .wav):</label><br>
+        <input type="file" name="audio_file" accept=".mp3,.wav" required><br><br>
+
+        <input type="submit" value="Upload Audio Tip">
+    </form>
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .accordion { margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; padding: 10px; }
+    summary { font-size: 1.2em; font-weight: bold; cursor: pointer; }
+    .tip { margin: 10px 0; display: flex; }
+    input, button { margin-top: 5px; padding: 5px; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>Pregnancy Health Tips</h1>
+
+<!-- Add new Trimester + First Tip -->
+<h2>Add Tip to New Trimester</h2>
+<form method="POST" action="/mother/add">
+  <input type="text" name="trimester" placeholder="Trimester Name (e.g. Fourth Trimester)" required>
+  <input type="text" name="new_tip" placeholder="Your tip..." required>
+  <button type="submit">Add</button>
+</form>
+
+<br>
+<hr>
+
+{% for trimester, data in tips.items() %}
+  <details class="accordion">
+    <summary>{{ trimester }}</summary>
+
+    <ul>
+      {% for tip in data.tips %}
+        <li class="tip">
+          {{ tip }}
+          <!-- Update Form -->
+          <form method="POST" action="/mother/update">
+            <input type="hidden" name="trimester" value="{{ trimester }}">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="text" name="updated_tip" value="{{ tip }}" required>
+            <button type="submit">Update</button>
+          </form>
+
+      {% endfor %}
+    </ul>
+
+  </details>
+{% endfor %}
+
+
+
+</body>
+</html>

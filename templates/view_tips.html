@@ -1,0 +1,151 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>View Health Tips</title>
+</head>
+<body>
+    <h2>All Health Tips</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Week Number</th>
+            <th>Keyword</th>
+            <th>Language</th>
+            <th>Content</th>
+        </tr>
+        {% for tip in tips %}
+        <tr>
+            <td>{{ tip[0] }}</td>
+            <td>{{ tip[1] }}</td>
+            <td>{{ tip[2] or 'N/A' }}</td>
+            <td>{{ tip[3] or 'N/A' }}</td>
+            <td>{{ tip[4] }}</td>
+            <td>{{ tip[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #fde2e4, #f9c5d1);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #d6336c;
+      margin-bottom: 16px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #d6336c;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b02a52;
+    }
+    .tip {
+      margin-top: 16px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pregnancy Health Tips</h1>
+    <input type="number" id="weekInput" placeholder="Enter your pregnancy week" min="1" max="40" />
+    <button onclick="showTip()">Get Health Tip</button>
+    <div id="tip" class="tip"></div>
+  </div>
+
+  <script>
+    const TIPS = {
+      "First Trimester": {
+        tips: [
+          "Take prenatal vitamins and drink water.",
+          "Eat healthy",
+          "Book your first prenatal appointment.",
+          "Eat small, frequent meals to fight nausea."
+        ]
+      },
+      "Second Trimester": {
+        tips: [
+          "Time for a mid-pregnancy scan!",
+          "Continue light exercise.",
+          "Talk to your doctor about baby movements."
+        ]
+      },
+      "Third Trimester": {
+        tips: [
+          "Begin practicing relaxation and breathing.",
+          "Start packing your hospital bag.",
+          "Review your birth plan with your doctor."
+        ]
+      }
+    };
+
+    function getHealthTip(weekNumber) {
+      let trimester = "";
+      if (weekNumber < 13) {
+        trimester = "First Trimester";
+      } else if (weekNumber < 27) {
+        trimester = "Second Trimester";
+      } else {
+        trimester = "Third Trimester";
+      }
+
+      const tipList = TIPS[trimester]?.tips || [];
+      if (tipList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * tipList.length);
+        return tipList[randomIndex];
+      } else {
+        return "Stay positive and follow medical advice.";
+      }
+    }
+
+    function showTip() {
+      const week = document.getElementById("weekInput").value;
+      const tip = getHealthTip(Number(week));
+      document.getElementById("tip").innerText = tip;
+    }
+  </script>
+</body>
+</html>
