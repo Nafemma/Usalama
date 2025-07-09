@@ -1,6 +1,5 @@
 # ------------ IMPORTS ------------
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
-<<<<<<< HEAD
 import sqlite3
 import random
 import smtplib
@@ -27,7 +26,7 @@ def allowed_file(filename):
 # ------------ EMAIL OTP FUNCTION ------------
 def send_otp(email):
     otp = str(random.randint(100000, 999999))
-=======
+
 import sqlite3  # For database operations
 import random   # For generating OTP
 import smtplib  # For sending OTP email
@@ -59,7 +58,7 @@ def allowed_file(filename):
 # ------------ OTP SENDING FUNCTION ------------
 def send_otp(email):
     otp = str(random.randint(100000, 999999))  # Generate random 6-digit OTP
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
+
     session['otp'] = otp
     session['email'] = email
 
@@ -83,18 +82,17 @@ def send_otp(email):
         print("Email error:", e)
         return False
 
-<<<<<<< HEAD
 # ------------ REGISTRATION ------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-=======
+
 # ------------ REGISTRATION + OTP VERIFICATION ------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         # Store form inputs in session for temporary use
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
+
         session['full_name'] = request.form['full_name']
         session['username'] = request.form['username']
         session['email'] = request.form['email']
@@ -105,18 +103,13 @@ def register():
         session['language'] = request.form['language']
         session['linked_mother_username'] = request.form.get('linked_mother_username')
 
-<<<<<<< HEAD
-=======
+
         # Send OTP
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
         if send_otp(session['email']):
             return redirect(url_for('verify_otp'))
         else:
             return "Failed to send OTP. Try again."
-<<<<<<< HEAD
-=======
 
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
     return render_template("register.html")
 
 @app.route('/verify-otp', methods=['GET', 'POST'])
@@ -134,11 +127,7 @@ def verify_otp():
                     session['username'],
                     session['email'],
                     session['phone'],
-<<<<<<< HEAD
                     generate_password_hash(session['password']),
-=======
-                    session['password'],
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
                     session['role'],
                     session['due_date'],
                     session['language'],
@@ -310,7 +299,7 @@ def request_reset():
         conn = sqlite3.connect("data/usalama.db")
         sql = conn.cursor()
         sql.execute("SELECT * FROM users WHERE email = ?", (email,))
-=======
+
 # ------------ LOGIN + ADMIN DASHBOARD ROUTE ------------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -323,17 +312,16 @@ def login():
         sql = conn.cursor()
         sql.execute("SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?", 
                     (identifier, identifier, password))
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
+
         user = sql.fetchone()
         conn.close()
 
         if user:
-<<<<<<< HEAD
             send_reset_email(email)
             return "Reset link sent to your email."
         else:
             error = "Email not found."
-    return render_template("request_reset.html", error=error)
+        return render_template("request_reset.html", error=error)
 
 # ------------ DASHBOARD + ADMIN ROUTES ------------
 @app.route('/admindashboard')
@@ -342,24 +330,6 @@ def admin_dashboard():
         return redirect(url_for('login'))
     return render_template("admin_dashboard.html", username=session['username'])
 
-=======
-            role = user[6]
-            session['username'] = user[2]
-            if role == 'admin':
-                return redirect(url_for('admin_dashboard'))
-            else:
-                return "Access denied. Not an admin."
-        else:
-            error = "Invalid credentials. Try again."
-    return render_template("login.html", error=error)
-
-@app.route('/admindashboard')
-def admin_dashboard():
-    username = session.get('username', 'Unknown')
-    return render_template("admin_dashboard.html", username=username)
-
-# ------------ ADMIN: VIEW USERS ------------
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 @app.route('/admin/users')
 def admin_users():
     conn = sqlite3.connect("data/usalama.db")
@@ -369,15 +339,8 @@ def admin_users():
     conn.close()
     return render_template('admin_users.html', users=users)
 
-<<<<<<< HEAD
 @app.route('/admin/add_tip', methods=['GET', 'POST'])
 def add_tip():
-=======
-# ------------ ADMIN: ADD TEXT TIP ------------
-@app.route('/admin/add_tip', methods=['GET', 'POST'])
-#changed add_tip to handle_add_tip
-def handle_add_tip():
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
     if request.method == 'POST':
         tip_type = request.form['tip_type']
         week_number = request.form.get('week_number')
@@ -385,12 +348,6 @@ def handle_add_tip():
         language = request.form['language']
         content = request.form['content']
 
-<<<<<<< HEAD
-=======
-        week_number = int(week_number) if week_number else None
-        keyword = keyword if keyword else None
-
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
         conn = sqlite3.connect("data/usalama.db")
         sql = conn.cursor()
         sql.execute('''
@@ -399,17 +356,9 @@ def handle_add_tip():
         ''', (tip_type, week_number, keyword, language, content))
         conn.commit()
         conn.close()
-<<<<<<< HEAD
         return render_template("success.html", message="Health tip uploaded successfully!")
     return render_template('add_tip.html')
 
-=======
-        return render_template("success.html", message=" Health tip uploaded successfully!")
-
-    return render_template('add_tip.html')
-
-# ------------ ADMIN: VIEW TEXT TIPS ------------
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 @app.route('/admin/view_tips')
 def view_tips():
     conn = sqlite3.connect("data/usalama.db")
@@ -419,10 +368,7 @@ def view_tips():
     conn.close()
     return render_template("view_tips.html", tips=tips)
 
-<<<<<<< HEAD
-=======
 # ------------ ADMIN: VIEW AUDIO TIPS ------------
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 @app.route('/admin/view_audio')
 def view_audio():
     conn = sqlite3.connect("data/usalama.db")
@@ -432,10 +378,7 @@ def view_audio():
     conn.close()
     return render_template("view_audio.html", audio_tips=audio_tips)
 
-<<<<<<< HEAD
-=======
 # ------------ ADMIN: UPLOAD AUDIO TIPS ------------
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 @app.route('/admin/upload_audio', methods=['GET', 'POST'])
 def upload_audio():
     if request.method == 'POST':
@@ -447,7 +390,6 @@ def upload_audio():
 
         if audio_file and allowed_file(audio_file.filename):
             filename = secure_filename(audio_file.filename)
-<<<<<<< HEAD
             save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             audio_file.save(save_path)
 
@@ -575,106 +517,5 @@ def custom_css(filename):
 
 
 # ------------ RUN APP ------------
-=======
-           # Save the file in the 'audios/' folder
-            save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            audio_file.save(save_path)
-
-            week_number = int(week_number) if week_number else None
-            keyword = keyword if keyword else None
-
-            conn = sqlite3.connect("data/usalama.db")
-            sql = conn.cursor()
-            # Save only the filename (e.g., "babycare.mp3") in the database
-            sql.execute('''
-            INSERT INTO audio_tips (tip_type, week_number, keyword, language, file_path)
-            VALUES (?, ?, ?, ?, ?)
-            ''', (tip_type, week_number, keyword, language, filename))
-            conn.commit()
-            conn.close()
-
-            return render_template("success.html", message=" Audio tip uploaded successfully!")
-
-        return " Invalid file format. Please upload .mp3 or .wav only."
-
-    return render_template("upload_audio.html")
-
-# ------------ AUDIO TIP PLAYBACK ROUTE ------------
-@app.route('/audios/<filename>')
-def get_audio(filename):
-    # This makes audio files inside 'audios/' available at /audios/<filename>
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-#----------------- MOTHER MODULE ROUTES ----------------
-#---------ADMIN---------------
-@app.route("/mother/")
-def index():
-    tips = load_tips()
-    return render_template("mother/index.html", tips=tips)
-
-@app.route("/mother/edit")
-def edit_tip():
-    trimester = request.args.get("trimester")
-    index = int(request.args.get("index"))
-    tips = load_tips()
-
-    if trimester in tips and 0 <= index < len(tips[trimester]["tips"]):
-        tip = tips[trimester]["tips"][index]
-        return render_template("mother/edit.html", trimester=trimester, index=index, tip=tip)
-    else:
-        return "Tip not found.", 404
-
-
-@app.route("/mother/add", methods=["POST"])
-def handle_add_tips():
-    trimester = request.form["trimester"]
-    new_tip = request.form["new_tip"]
-    add_tip(trimester, new_tip)
-    return redirect(url_for("index"))
-
-@app.route("/mother/update", methods=["POST"])
-def handle_update():
-    trimester = request.form["trimester"]
-    index = int(request.form["index"])
-    updated_tip = request.form["updated_tip"]
-    update_tip(trimester, index, updated_tip)
-    return redirect(url_for("index"))
-
-@app.route("/mother/delete", methods=["POST"])
-def handle_delete():
-    trimester = request.form["trimester"]
-    index = int(request.form["index"])
-    delete_tip(trimester, index)
-    return redirect(url_for("index"))
-#-----------MOTHER MODULE user-dashboard- route----
-@app.route("/mother/dashboard", methods=["GET", "POST"])
-def mother_dashboard():
-    info = None
-    tip = None
-    danger_result = None
-    mood_message = None
-
-    if request.method == "POST":
-        action = request.form.get("action")
-
-        if action == "calculate":
-            start_date = request.form["start_date"]
-            info = calculate_pregnancy_info(start_date)
-            tip = get_health_tip(info["week_number"])
-
-        elif action == "log_mood":
-            user_id = session.get("username", "guest")
-            mood = request.form["mood"]
-            mood_message = log_mood(user_id, mood)
-
-        elif action == "check_danger":
-            symptoms = request.form.get("symptoms", "").split(",")
-            danger_result = check_danger_signs(symptoms)
-
-    return render_template("mother/mother_dashboard.html", info=info, tip=tip,
-          mood_message=mood_message, danger_result=danger_result)
-
-# ------------ MAIN ------------
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 if __name__ == "__main__":
     app.run(debug=True)
