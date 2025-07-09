@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Health Tips</title>
+</head>
+<body>
+    <h2>All Health Tips</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Week Number</th>
+            <th>Keyword</th>
+            <th>Language</th>
+            <th>Content</th>
+        </tr>
+        {% for tip in tips %}
+        <tr>
+            <td>{{ tip[0] }}</td>
+            <td>{{ tip[1] }}</td>
+            <td>{{ tip[2] or 'N/A' }}</td>
+            <td>{{ tip[3] or 'N/A' }}</td>
+            <td>{{ tip[4] }}</td>
+            <td>{{ tip[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
