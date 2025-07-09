@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Reports</title>
+    <style>
+        body { font-family: Arial; margin: 30px; }
+        h2 { color: #8D38C9; }
+        table { width: 50%; border-collapse: collapse; margin-bottom: 40px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <h2>User Summary by Role</h2>
+    <table>
+        <tr><th>Role</th><th>Count</th></tr>
+        {% for role, count in user_summary %}
+        <tr><td>{{ role }}</td><td>{{ count }}</td></tr>
+        {% endfor %}
+    </table>
+
+    <h2>Login Activity (Failed Attempts)</h2>
+    <table>
+        <tr><th>Username</th><th>Failed Attempts</th></tr>
+        {% for username, attempts in login_activity %}
+        <tr><td>{{ username }}</td><td>{{ attempts }}</td></tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
