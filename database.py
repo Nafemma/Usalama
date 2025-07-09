@@ -55,8 +55,29 @@ if not existing_admin:
     ))
     print(" Default admin added.")
 else:
-    print("Admin already exists. Skipping insert.")
+    print("Admin1 already exists. Skipping insert.")
 
+#ADMIN2: IF NO ADMIN EXISTS, INSERT DEFAULT ADMIN
+sql.execute("SELECT * FROM users WHERE username = 'admin2'")
+existing_admin2 = sql.fetchone()
+if not existing_admin2:
+    sql.execute('''
+        INSERT INTO users (full_name, username, email, phone, password, role, due_date, language, linked_mother_username)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        'Alinafe Mpofu',
+        'admin2',
+        'mpofucynthias@gmail.com',
+        '0882700581',
+        'adminpass123',
+        'admin',
+        None,
+        'english',
+        None
+    ))
+    print(" Default admin2 added.")
+else:
+    print("Admin2 already exists. Skipping insert.")
 
 
 # TEXT TIPS TABLE
@@ -105,6 +126,33 @@ try:
     print(" 'mood_logs' table created successfully.")
 except Exception as e:
     print(" Error creating 'mood_logs' table:", e)
+
+
+# LOGIN ATTEMPTS TABLE
+try:
+    sql.execute('''
+        CREATE TABLE IF NOT EXISTS login_attempts (
+            username TEXT PRIMARY KEY,
+            failed_attempts INTEGER DEFAULT 0,
+            last_attempt TIMESTAMP
+        )
+    ''')
+    print(" 'login_attempts' table created successfully.")
+except Exception as e:
+    print(" Error creating 'login_attempts' table:", e)
+
+# PASSWORD RESET TABLE
+try:
+    sql.execute('''
+        CREATE TABLE IF NOT EXISTS password_resets (
+            email TEXT PRIMARY KEY,
+            token TEXT,
+            created_at TIMESTAMP
+        )
+    ''')
+    print(" 'password_resets' table created successfully.")
+except Exception as e:
+    print(" Error creating 'password_resets' table:", e)
 
 # Finalize
 conn.commit()
