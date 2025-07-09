@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login - Usalama</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="/utilities/css/forms.css">
 </head>
 <body>
-    <h2>Login</h2>
-    <nav>
-        <a href="index.html">Home</a>
-    </nav>
+    <div class="page-wrapper">
+        <div class="main-content">
+            <div class="form-container">
+                <h2>Login</h2>
+                <form method="POST">
+                    <label>Email or Username:</label>
+                    <input type="text" name="identifier" required>
 
-    <form method="POST" action="/login">
-    <label>Email or Username:</label><br>
-    <input type="text" name="identifier" required><br><br>
+                    <label>Password:</label>
+                    <input type="password" name="password" required>
 
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+                    <button type="submit">Login</button>
 
-    <input type="submit" value="Login">
-</form>
+                    {% if error %}
+                        <p class="error">{{ error }}</p>
+                    {% endif %}
+                </form>
 
+                <div class="form-links">
+                    <a href="/">Home</a> |
+                    <a href="/register">Register</a> |
+                    <a href="/request-reset">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
 
-    {% if error %}
-<p style="color: red;">{{ error }}</p>
-{% endif %}
-    <p>Don't have an account? <a href="/register">Register here</a></p>
-    <p>Forgot your password? <a href="/reset_password">Reset it here</a></p>
+        <footer>
+            &copy; 2025 Usalama App — All rights reserved
+        </footer>
+    </div>
 </body>
 </html>
-
-

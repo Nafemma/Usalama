@@ -9,14 +9,13 @@
 <!------------------------------------------- Navigation Bar----------- ------------->
 <nav>
     <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="about.html">About MamaTeko</a></li>
+        <li><a href="{{ url_for('index')}}">Home</a></li>
+        <li><a href="{{ url_for('about')}}">About Usalama</a></li>
+        <li><a href="{{ url_for('login')}}">Sign In</a></li>
+        <li><a href="{{ url_for('register')}}">Register</a></li>
+        <li><a href="faq">FAQs</a></li>
     </ul>
 </nav>
-
-    <p>Please <a href="register.html">register</a> or <a href="login.html">login</a> to begin.</p>
 
     </body>
     
@@ -25,8 +24,8 @@
         <p style="text-align: center;">
             &copy; 2025 Usalama. All rights reserved.<br>
             <a href="terms.html">Terms & Conditions</a> |
-            <a href="faq.html">FAQs</a> |
-            <a href="contact.html">Contact</a>
+            <a href="{{ url_for('faq')}}">FAQs</a> |
+            <a href="{{ url_for('contact')}}">Contact</a>
         </p>
     </footer>
     </html>

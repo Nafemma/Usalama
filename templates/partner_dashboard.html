@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Partner Dashboard</title>
+    <style>
+        body { font-family: Arial; background: #f2f2f2; padding: 20px; }
+        h1 { color: #8D38C9; }
+        .info { background: white; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome, Partner!</h1>
+
+    {% if linked_mother %}
+        <div class="info">
+            <h3>Linked Mother Profile</h3>
+            <p><strong>Full Name:</strong> {{ mother_info[0] }}</p>
+            <p><strong>Email:</strong> {{ mother_info[1] }}</p>
+            <p><strong>Phone:</strong> {{ mother_info[2] }}</p>
+            <p><strong>Due Date:</strong> {{ mother_info[3] }}</p>
+            <p><strong>Language:</strong> {{ mother_info[4] }}</p>
+        </div>
+    {% else %}
+        <p>No linked mother found in your profile.</p>
+    {% endif %}
+
+{% if tips %}
+    <div class="info">
+        <h3>Health Tips for This Week</h3>
+        <ul>
+        {% for tip in tips %}
+            <li><strong>{{ tip[0] }}:</strong> {{ tip[1] }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <div class="info">
+        <h3>Health Tips for This Week</h3>
+        <p>No tips found for this week or language.</p>
+    </div>
+{% endif %}
+
+</body>
+</html>
