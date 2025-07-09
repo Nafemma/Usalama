@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregnancy Health Tips</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+  
+
+    a {
+      color: #e80b60;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .accordion {
+      margin-bottom: 20px;
+      border: 1px solid #e80b60;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      color: #e80b60;
+    }
+
+    .tip {
+      margin: 10px 0;
+    }
+
+    input, button {
+      margin-top: 5px;
+      padding: 5px;
+      border: 1px solid #e80b60;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #e80b60;
+      color: white;
+      cursor: pointer;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #e80b60;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Pregnancy Health Tips</h1>
+<a href="/mother/dashboard">Dashboard</a>
+
+<h2>Add Tip to New Trimester</h2>
+<form method="POST" action="/mother/add">
+  <input type="text" name="trimester" placeholder="Trimester Name (e.g. Fourth Trimester)" required>
+  <input type="text" name="new_tip" placeholder="Your tip..." required>
+  <button type="submit">Add</button>
+</form>
+
+<br>
+<hr>
+
+{% for trimester, data in tips.items() %}
+  <details class="accordion">
+    <summary>{{ trimester }}</summary>
+    <form method="POST" action="/mother/add">
+      <input type="hidden" name="trimester" value="{{ trimester }}">
+      <input type="text" name="new_tip" placeholder="Add new tip..." required>
+      <button type="submit">Add Tip</button>
+    </form>
+    <ul>
+      {% for tip in data.tips %}
+        <li class="tip">
+          {{ tip }}
+          <div style="display:inline-block;">
+            <a href="/mother/edit?trimester={{ trimester }}&index={{ loop.index0 }}">Edit</a>
+            <form method="POST" action="/mother/delete" style="display:inline;">
+              <input type="hidden" name="trimester" value="{{ trimester }}">
+              <input type="hidden" name="index" value="{{ loop.index0 }}">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </details>
+{% endfor %}
+
+</body>
+</html>
