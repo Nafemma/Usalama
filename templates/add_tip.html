@@ -2,8 +2,18 @@
 <html>
 <head>
     <title>Upload Health Tip - Admin</title>
+    <link rel="stylesheet" href="/utilities/css/forms.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+<a href="{{ url_for('admin.admin_dashboard') }}" class="home-icon" title="Back to Dashboard">
+    <i class="fas fa-home"></i>
+</a>
+     <div class="page-wrapper">
+        <div class="main-content">
+            <div class="form-container">
+                <img src="{{ url_for('custom_img', filename='logo.jpg') }}" alt="Usalama Logo" class="form-logo">
+
     <h2>Upload Health Tip</h2>
     <form method="POST" action="/admin/add_tip">
         <label>Tip Type:</label><br>
@@ -24,9 +34,16 @@
         <label>Tip Content:</label><br>
         <textarea name="content" rows="5" cols="50" required></textarea><br><br>
 
-        <input type="submit" value="Upload Tip">
+        <button type="submit" value="Upload Tip">Upload Tip</button>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
     </form>
+    <div class="form-links">
+                    <a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a> 
+            </div>
+        </div>
     <br>
-    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+        </div>  
 </body>
 </html>

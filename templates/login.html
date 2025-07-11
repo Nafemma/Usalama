@@ -3,11 +3,19 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="/utilities/css/forms.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <a href="{{ url_for('index') }}" class="home-icon" title="Back to Home">
+    <i class="fas fa-home"></i>
+</a>
+
     <div class="page-wrapper">
         <div class="main-content">
             <div class="form-container">
+                <img src="{{ url_for('custom_img', filename='logo.jpg') }}" alt="Usalama Logo" class="form-logo">
+
+
                 <h2>Login</h2>
                 <form method="POST">
                     <label>Email or Username:</label>
@@ -25,7 +33,7 @@
 
                 <div class="form-links">
                     <a href="/">Home</a> |
-                    <a href="/register">Register</a> |
+                    <a href="/auth.register">Register</a> | 
                     <a href="/request-reset">Forgot Password?</a>
                 </div>
             </div>

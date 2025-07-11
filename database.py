@@ -1,4 +1,6 @@
 import sqlite3
+from werkzeug.security import generate_password_hash
+
 
 print(" Creating Usalama database...")
 
@@ -33,11 +35,13 @@ except Exception as e:
     print(" Error creating 'users' table:", e)
 
 
-#CHECK IF ADMIN ALREADY EXISTS
+# Generate hashed password
+hashed_password = generate_password_hash('adminpass123')
+
+# CHECK IF ADMIN1 ALREADY EXISTS
 sql.execute("SELECT * FROM users WHERE username = 'admin1'")
 existing_admin = sql.fetchone()
 
-# ADMIN1: IF NO ADMIN EXISTS, INSERT DEFAULT ADMIN
 if not existing_admin:
     sql.execute('''
         INSERT INTO users (full_name, username, email, phone, password, role, due_date, language, linked_mother_username)
@@ -47,19 +51,21 @@ if not existing_admin:
         'admin1',
         'mpofuemmanuellah@gmail.com',
         '0885724876',
-        'adminpass123',
+        hashed_password,
         'admin',
         None,
         'english',
         None
     ))
-    print(" Default admin added.")
+    print(" Default admin1 added.")
 else:
     print("Admin1 already exists. Skipping insert.")
 
-#ADMIN2: IF NO ADMIN EXISTS, INSERT DEFAULT ADMIN
+
+# ADMIN2
 sql.execute("SELECT * FROM users WHERE username = 'admin2'")
 existing_admin2 = sql.fetchone()
+
 if not existing_admin2:
     sql.execute('''
         INSERT INTO users (full_name, username, email, phone, password, role, due_date, language, linked_mother_username)
@@ -69,7 +75,7 @@ if not existing_admin2:
         'admin2',
         'mpofucynthias@gmail.com',
         '0882700581',
-        'adminpass123',
+        hashed_password,
         'admin',
         None,
         'english',
@@ -78,6 +84,7 @@ if not existing_admin2:
     print(" Default admin2 added.")
 else:
     print("Admin2 already exists. Skipping insert.")
+
 
 
 # TEXT TIPS TABLE
@@ -153,6 +160,23 @@ try:
     print(" 'password_resets' table created successfully.")
 except Exception as e:
     print(" Error creating 'password_resets' table:", e)
+    
+# PREGNANCY TRIMESTER TIPS TABLE
+try:
+    sql.execute('''
+        CREATE TABLE IF NOT EXISTS trimester_tips (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            trimester TEXT NOT NULL,  
+            tip_text TEXT NOT NULL,
+            language TEXT DEFAULT 'english',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    print(" 'trimester_tips' table created successfully.")
+except Exception as e:
+    print(" Error creating 'trimester_tips' table:", e)
+
 
 # Finalize
 conn.commit()

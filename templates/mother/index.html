@@ -1,106 +1,53 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pregnancy Health Tips</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-
-  
-
-    a {
-      color: #e80b60;
-      text-decoration: none;
-      margin-right: 10px;
-    }
-
-    .accordion {
-      margin-bottom: 20px;
-      border: 1px solid #e80b60;
-      border-radius: 6px;
-      padding: 10px;
-    }
-
-    summary {
-      font-size: 1.2em;
-      font-weight: bold;
-      cursor: pointer;
-      color: #e80b60;
-    }
-
-    .tip {
-      margin: 10px 0;
-    }
-
-    input, button {
-      margin-top: 5px;
-      padding: 5px;
-      border: 1px solid #e80b60;
-      border-radius: 4px;
-    }
-
-    button {
-      background-color: #e80b60;
-      color: white;
-      cursor: pointer;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #e80b60;
-      margin: 20px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Mother Dashboard - Usalama</title>
+    <link rel="stylesheet" href="{{ url_for('custom_css', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <div class="page-wrapper">
+        <div class="main-content">
+            <div class="dashboard-card">
+                <img src="{{ url_for('custom_css', filename='../imgs/logo.jpg') }}" alt="Usalama Logo" class="logo-img">
+                <h2>Welcome, {{ username }}!</h2>
+                <p>Here are your trimester health tips:</p>
 
-<h1>Pregnancy Health Tips</h1>
-<a href="/mother/dashboard">Dashboard</a>
+                {% if tips %}
+                    {% for trimester, data in tips.items() %}
+                        <h3>{{ trimester | capitalize }} Trimester</h3>
+                        <ul>
+                            {% for tip in data.tips %}
+                                <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% else %}
+                    <p>No health tips available at this time.</p>
+                {% endif %}
 
-<h2>Add Tip to New Trimester</h2>
-<form method="POST" action="/mother/add">
-  <input type="text" name="trimester" placeholder="Trimester Name (e.g. Fourth Trimester)" required>
-  <input type="text" name="new_tip" placeholder="Your tip..." required>
-  <button type="submit">Add</button>
-</form>
+                <hr>
 
-<br>
-<hr>
+                <div class="dashboard-buttons">
+                    <a class="btn" href="{{ url_for('mother.track_mood') }}">
+                        <i class="fas fa-smile"></i> Track Mood
+                    </a>
+                    <a class="btn" href="{{ url_for('mother.audio_tips') }}">
+                        <i class="fas fa-headphones"></i> Listen to Audio Tips
+                    </a>
+                </div>
 
-{% for trimester, data in tips.items() %}
-  <details class="accordion">
-    <summary>{{ trimester }}</summary>
-    <form method="POST" action="/mother/add">
-      <input type="hidden" name="trimester" value="{{ trimester }}">
-      <input type="text" name="new_tip" placeholder="Add new tip..." required>
-      <button type="submit">Add Tip</button>
-    </form>
-    <ul>
-      {% for tip in data.tips %}
-        <li class="tip">
-          {{ tip }}
-          <div style="display:inline-block;">
-            <a href="/mother/edit?trimester={{ trimester }}&index={{ loop.index0 }}">Edit</a>
-            <form method="POST" action="/mother/delete" style="display:inline;">
-              <input type="hidden" name="trimester" value="{{ trimester }}">
-              <input type="hidden" name="index" value="{{ loop.index0 }}">
-              <button type="submit">Delete</button>
-            </form>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </details>
-{% endfor %}
+                <div class="form-links">
+                    <a href="{{ url_for('mother.index') }}"><i class="fas fa-home"></i> Home</a>
+                    <a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
 
+        <footer>
+            &copy; 2025 Usalama. All rights reserved.
+        </footer>
+    </div>
 </body>
 </html>

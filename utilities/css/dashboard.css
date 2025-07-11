@@ -1,0 +1,116 @@
+/* Dashboard base layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+/* Page wrapper layout */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Dashboard card */
+.dashboard-card {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Logo image styling */
+.logo-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #8D38C9;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* Dashboard heading */
+.dashboard-card h2 {
+    color: #8D38C9;
+    margin-bottom: 1rem;
+}
+
+ul {
+    text-align: left;
+    padding-left: 1.2rem;
+    margin-top: 1rem;
+}
+
+li {
+    margin-bottom: 0.75rem;
+}
+
+/* Navigation links */
+.form-links {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.form-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #8D38C9;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #444;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+    margin-top: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.dashboard-buttons .btn {
+    background-color: #8D38C9;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.3s ease;
+}
+
+.dashboard-buttons .btn:hover {
+    background-color: #F535AA;
+}

@@ -4,29 +4,28 @@
     <title>Usalama - Welcome</title>
 </head>
 <body>
-   <h1>Welcome to Usalama</h1>
-    <p>Usalama your companion from conception to child birth.</p>
-<!------------------------------------------- Navigation Bar----------- ------------->
-<nav>
-    <ul>
-        <li><a href="{{ url_for('index')}}">Home</a></li>
-        <li><a href="{{ url_for('about')}}">About Usalama</a></li>
-        <li><a href="{{ url_for('login')}}">Sign In</a></li>
-        <li><a href="{{ url_for('register')}}">Register</a></li>
-        <li><a href="faq">FAQs</a></li>
-    </ul>
-</nav>
+    <h1>Welcome to Usalama</h1>
+    <p>Usalama, your companion from conception to childbirth.</p>
 
-    </body>
-    
-    <footer>
-        <hr>
-        <p style="text-align: center;">
-            &copy; 2025 Usalama. All rights reserved.<br>
-            <a href="terms.html">Terms & Conditions</a> |
-            <a href="{{ url_for('faq')}}">FAQs</a> |
-            <a href="{{ url_for('contact')}}">Contact</a>
-        </p>
-    </footer>
-    </html>
-     
+    <!------------------------------------------- Navigation Bar ----------->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Usalama</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+            <li><a href="{{ url_for('faq') }}">FAQs</a></li>
+        </ul>
+    </nav>
+</body>
+
+<footer>
+    <hr>
+    <p style="text-align: center;">
+        &copy; 2025 Usalama. All rights reserved.<br>
+        <a href="terms.html">Terms & Conditions</a> |
+        <a href="{{ url_for('faq') }}">FAQs</a> |
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </p>
+</footer>
+</html>
