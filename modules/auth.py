@@ -54,7 +54,7 @@ def send_reset_email(email):
     conn.commit()
     conn.close()
 
-    reset_url = url_for('auth_bp.reset_password', token=token, _external=True)
+    reset_url = url_for('auth.reset_password', token=token, _external=True)
     subject = "Usalama Password Reset"
     body = f"Click the link to reset your password:\n{reset_url}\nIf you didn’t request this, ignore this message."
 
@@ -89,7 +89,7 @@ def register():
         session['linked_mother_username'] = request.form.get('linked_mother_username')
 
         if send_otp(session['email']):
-            return redirect(url_for('auth_bp.verify_otp'))
+            return redirect(url_for('auth.verify_otp'))
         else:
             return "Failed to send OTP. Try again."
     return render_template("register.html")
@@ -118,7 +118,7 @@ def verify_otp():
                 ))
                 conn.commit()
                 conn.close()
-                return redirect(url_for('auth_bp.login'))
+                return redirect(url_for('auth.login'))
             except Exception as e:
                 return f"Error saving to DB: {e}"
         else:
@@ -171,9 +171,9 @@ def login():
             if role == 'admin':
                 return redirect(url_for('admin.admin_dashboard'))
             elif role == 'mother':
-                return redirect(url_for('mother_bp.mother_index'))
+                return redirect(url_for('mother.index'))
             elif role == 'partner':
-                return redirect(url_for('partner_bp.partner_dashboard'))
+                return redirect(url_for('partner.partner_dashboard'))
             else:
                 return "Unknown role."
         else:

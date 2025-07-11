@@ -1,7 +1,10 @@
 # app.py
 
 from flask import Flask, send_from_directory, render_template
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 
 # ------------ APP SETUP ------------
 app = Flask(__name__)
@@ -21,6 +24,7 @@ from modules.auth import auth_bp
 from modules.admin import admin_bp
 from modules.mother import mother_bp
 from modules.partner import partner_bp
+
 
 # ------------ REGISTER BLUEPRINTS ------------
 app.register_blueprint(auth_bp)
@@ -70,6 +74,13 @@ def index():
 def custom_img(filename):
     return send_from_directory('utilities/imgs', filename)
 
+
+@app.after_request
+def add_no_cache_headers(response):
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
 
 # ------------ RUN APP ------------
 if __name__ == "__main__":

@@ -1,0 +1,20 @@
+<!-- templates/mother/track_mood.html -->
+{% extends "mother/layout.html" %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h2>Track Your Mood</h2>
+    <form method="POST">
+        <label for="mood">How are you feeling today?</label>
+        <select name="mood" id="mood" required>
+            <option value="Happy">😊 Happy</option>
+            <option value="Tired">😴 Tired</option>
+            <option value="Anxious">😟 Anxious</option>
+            <option value="Excited">😁 Excited</option>
+            <option value="Neutral">😐 Neutral</option>
+        </select>
+        <br><br>
+        <button class="btn btn-primary" type="submit">Log Mood</button>
+    </form>
+</div>
+{% endblock %}

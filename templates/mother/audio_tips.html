@@ -1,0 +1,25 @@
+{% extends "mother/layout.html" %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h2>Audio Tips</h2>
+
+    {% if audio_tips %}
+        <ul>
+            {% for file_path, tip_type, language in audio_tips %}
+                <li style="margin-bottom: 20px;">
+                    <strong>Type:</strong> {{ tip_type|capitalize }} |
+                    <strong>Language:</strong> {{ language|capitalize }}<br>
+
+                    <audio controls>
+                        <source src="{{ url_for('get_audio', filename=file_path) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No audio tips available.</p>
+    {% endif %}
+</div>
+{% endblock %}

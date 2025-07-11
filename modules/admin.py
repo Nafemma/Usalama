@@ -80,7 +80,8 @@ def add_tip():
         conn.commit()
         conn.close()
 
-        return render_template("success.html", message="Health tip uploaded successfully!")
+        return render_template("success.html", message="health tip uploaded successfully.", back_url=url_for('admin.admin_dashboard'))
+
     
     return render_template("add_tip.html")
 
@@ -109,7 +110,8 @@ def upload_audio():
             conn.commit()
             conn.close()
 
-            return render_template("success.html", message="Audio tip uploaded successfully.")
+            return render_template("success.html", message="Audio tip uploaded successfully.", back_url=url_for('admin.admin_dashboard'))
+
         else:
             return "Invalid file format. Please upload .mp3 or .wav only."
 

@@ -1,18 +1,21 @@
 # mother_module.py
-<<<<<<< HEAD
 
 import json
 from datetime import datetime, timedelta
 from utilities.data_loader import load_json_data
 
-=======
-import json
-import random
-from datetime import datetime, timedelta
-from utilities.data_loader import load_json_data
+try:
+    from utilities.data_loader import load_json_data
+except ImportError:
+    # Fallback if utilities module not found
+    import json
+    def load_json_data(filepath):
+        try:
+            with open(filepath, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {}
 
-
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 # Load tips and danger signs from external files
 TIPS = load_json_data("data/health_tips.json")
 DANGER_SIGNS = load_json_data("data/danger_signs.json")
@@ -39,40 +42,12 @@ def calculate_pregnancy_info(start_date_str):
     }
 
 # 2. Get Health Tip
-<<<<<<< HEAD
 def get_health_tip(week_number):
     tips = {int(k): v for k, v in TIPS.items()}
     for week in sorted(tips.keys(), reverse=True):
         if week_number >= week:
             return tips[week]
     return "Stay positive and follow medical advice."
-=======
-# def get_health_tip(week_number):
-#     tips = {int(k): v for k, v in TIPS.items()}
-#     for week in sorted(tips.keys(), reverse=True):
-#         if week_number >= week:
-#             return tips[week]
-#     return "Stay positive and follow medical advice."
-
-# Get a health tip based on the week number randomly selected from the trimester's tips
-def get_health_tip(week_number):
-    
-    if week_number < 13:
-        trimester = "First Trimester"
-    elif week_number < 27:
-        trimester = "Second Trimester"
-    else:
-        trimester = "Third Trimester"
-
-    trimester_data = TIPS.get(trimester, {})
-    tip_list = trimester_data.get("tips", [])
-
-    if tip_list:
-        return random.choice(tip_list)
-    else:
-        return "Stay positive and follow medical advice."
-
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 
 # 3. Log Mood
 def log_mood(user_id, mood):
@@ -82,29 +57,17 @@ def log_mood(user_id, mood):
     return f"Mood '{mood}' logged."
 
 # 4. Danger Sign Checker
-<<<<<<< HEAD
-=======
-# normalized the danger signs to handle case insensitivity and partial matches
-# and added more detailed messages for each sign    
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 def check_danger_signs(symptoms):
     result = {}
     for symptom in symptoms:
         normalized = symptom.strip().lower()
-<<<<<<< HEAD
         if normalized in DANGER_SIGNS:
             result[normalized] = DANGER_SIGNS[normalized]
-    return result if result else "No danger signs found."
+    return result  # Always return dict (empty if none found)
 
 
 
-=======
-        for danger_sign, info in DANGER_SIGNS.items():
-            if normalized in danger_sign.lower() or danger_sign.lower() in normalized:
-                result[danger_sign] = info
-    return result if result else "No danger signs found."
 
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 # 5. Logout
 def logout():
     return "You have been logged out. Stay healthy!"

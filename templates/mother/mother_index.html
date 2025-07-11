@@ -1,0 +1,40 @@
+<!-- templates/mother/mother_index.html -->
+{% extends "mother/layout.html" %}
+
+{% block content %}
+<div class="dashboard-card">
+    <img src="{{ url_for('custom_img', filename='logo.jpg') }}" alt="Usalama Logo" class="logo-img">
+    <h2>Welcome, {{ username }}!</h2>
+
+    <p><strong>Week:</strong> {{ pregnancy_info.week_number }} |
+       <strong>Trimester:</strong> {{ pregnancy_info.trimester }} |
+       <strong>Due Date:</strong> {{ pregnancy_info.due_date }}</p>
+
+    <h3>Health Tip:</h3>
+    <p>{{ health_tip }}</p>
+
+    <div class="dashboard-buttons">
+        <div class="button-row">
+            <a class="btn btn-primary" href="{{ url_for('mother.track_mood') }}">
+                <i class="fas fa-smile"></i> Track Mood
+            </a>
+            <a class="btn btn-secondary" href="{{ url_for('mother.audio_tips') }}">
+                <i class="fas fa-headphones"></i> Listen to Audio Tips
+            </a>
+        </div>
+        <div class="button-row">
+            <a class="btn btn-mood" href="{{ url_for('mother.track_mood') }}">
+                <i class="fas fa-heart"></i> Log Your Mood
+            </a>
+            <a class="btn btn-danger" href="{{ url_for('mother.check_danger_signs_route') }}">
+                <i class="fas fa-exclamation-triangle"></i> Check Danger Signs
+            </a>
+        </div>
+    </div>
+
+    <div class="form-links">
+
+        <a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</div>
+{% endblock %}

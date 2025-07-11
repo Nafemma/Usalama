@@ -6,6 +6,7 @@
         body { font-family: Arial; background: #f2f2f2; padding: 20px; }
         h1 { color: #8D38C9; }
         .info { background: white; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        audio { margin-top: 10px; display: block; }
     </style>
 </head>
 <body>
@@ -14,31 +15,55 @@
     {% if linked_mother %}
         <div class="info">
             <h3>Linked Mother Profile</h3>
-            <p><strong>Full Name:</strong> {{ mother_info[0] }}</p>
-            <p><strong>Email:</strong> {{ mother_info[1] }}</p>
-            <p><strong>Phone:</strong> {{ mother_info[2] }}</p>
-            <p><strong>Due Date:</strong> {{ mother_info[3] }}</p>
-            <p><strong>Language:</strong> {{ mother_info[4] }}</p>
+            <p><strong>Full Name:</strong> {{ mother_info[1] }}</p>
+            <p><strong>Email:</strong> {{ mother_info[2] }}</p>
+            <p><strong>Phone:</strong> {{ mother_info[3] }}</p>
+            <p><strong>Due Date:</strong> {{ mother_info[4] }}</p>
+            <p><strong>Language:</strong> {{ mother_info[5] }}</p>
         </div>
+
+        <div class="info">
+            <h3>Recent Mood Logs</h3>
+            {% if moods %}
+                <ul>
+                {% for log in moods %}
+                    <li>{{ log[0] }} - {{ log[1] }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No mood logs available.</p>
+            {% endif %}
+        </div>
+
+        <div class="info">
+            <h3>Recent Symptoms/Danger Signs</h3>
+            {% if symptoms %}
+                <ul>
+                {% for s in symptoms %}
+                    <li>{{ s[0] }} - {{ s[1] }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No symptoms reported.</p>
+            {% endif %}
+        </div>
+
+       <div class="info">
+    <h3>Audio Tips</h3>
+    {% if audio_tips %}
+        {% for audio in audio_tips %}
+            <p><strong>{{ audio[0].capitalize() }} Tip ({{ audio[1] }})</strong></p>
+            <audio controls>
+                <source src="{{ url_for('get_audio', filename=audio[1]) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {% endfor %}
+    {% else %}
+        <p>No audio tips available.</p>
+    {% endif %}
+</div>
     {% else %}
         <p>No linked mother found in your profile.</p>
     {% endif %}
-
-{% if tips %}
-    <div class="info">
-        <h3>Health Tips for This Week</h3>
-        <ul>
-        {% for tip in tips %}
-            <li><strong>{{ tip[0] }}:</strong> {{ tip[1] }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-{% else %}
-    <div class="info">
-        <h3>Health Tips for This Week</h3>
-        <p>No tips found for this week or language.</p>
-    </div>
-{% endif %}
-
 </body>
 </html>

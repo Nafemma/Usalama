@@ -114,3 +114,10 @@ footer {
 .dashboard-buttons .btn:hover {
     background-color: #F535AA;
 }
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Adds space between buttons */
+    margin-bottom: 15px; /* Adds space between rows */
+}

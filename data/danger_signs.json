@@ -1,12 +1,6 @@
 {
   "bleeding": "Go to the emergency room immediately.",
   "severe headache": "May indicate high blood pressure.",
-<<<<<<< HEAD
-  "blurred vision": "See a doctor immediately.",
-  "high fever": "Seek medical attention — possible infection.",
-  "severe abdominal pain": "Call emergency services now.",
-  "swelling of hands/face": "Can be a sign of preeclampsia."
-=======
   "headache": "May indicate high blood pressure.",
   "persistent vomiting": "Seek medical attention.",
   "persistent nausea": "Seek medical attention.",
@@ -34,6 +28,4 @@
   "Fever above 38°C": "This could indicate an infection. Seek medical advice.",
   "Reduced fetal movement": "If you notice a significant decrease in fetal movement, contact your healthcare provider.",
   "severe pain during urination": "Consult a doctor immediately."
->>>>>>> 44fb19b8e2d234b3d7afb125605a1b6e91564d97
 }
-

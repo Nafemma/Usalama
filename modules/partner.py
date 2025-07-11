@@ -1,12 +1,9 @@
-# modules/partner.py
-
 from flask import Blueprint, render_template, session, redirect, url_for
 import sqlite3
 from datetime import datetime
 
 partner_bp = Blueprint('partner', __name__)
 
-# ----------- Partner Dashboard -----------
 @partner_bp.route('/partnerdashboard')
 def partner_dashboard():
     username = session.get('username')
@@ -23,16 +20,21 @@ def partner_dashboard():
 
     mother_info = None
     tips = []
+    moods = []
+    symptoms = []
+    audio_tips = []
 
     if linked_mother:
         # Fetch the mother's full info
-        sql.execute("SELECT full_name, email, phone, due_date, language FROM users WHERE username = ?", (linked_mother,))
+        sql.execute("SELECT id, full_name, email, phone, due_date, language FROM users WHERE username = ?", (linked_mother,))
         mother_info = sql.fetchone()
 
         if mother_info:
-            due_date_str = mother_info[3]
-            language = mother_info[4]
+            mother_id = mother_info[0]
+            due_date_str = mother_info[4]
+            language = mother_info[5]
 
+            # Calculate pregnancy week
             if due_date_str:
                 try:
                     due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
@@ -46,12 +48,42 @@ def partner_dashboard():
                             WHERE week_number = ? AND language = ?
                         """, (pregnancy_weeks, language))
                         tips = sql.fetchall()
+
                 except Exception as e:
                     print("Date error:", e)
+
+            # Fetch recent moods (last 5)
+            # Fetch recent moods (last 5)
+            sql.execute("""
+            SELECT timestamp, mood FROM mood_logs
+            WHERE username = ?
+            ORDER BY timestamp DESC
+            LIMIT 5
+            """, (linked_mother,))
+            moods = sql.fetchall()
+
+            # Fetch recent symptoms/danger signs (last 5)
+            # Adjust table/column names if needed
+           ###    WHERE user_id = ?
+             #   ORDER BY reported_at DESC
+             #   LIMIT 5
+           # """, (mother_id,))
+           # symptoms = sql.fetchall()
+
+            # Fetch audio tips matching language
+            sql.execute("""
+                SELECT tip_type, file_path FROM audio_tips
+                WHERE language = ?
+                ORDER BY tip_type
+            """, (language,))
+            audio_tips = sql.fetchall()
 
     conn.close()
 
     return render_template("partner_dashboard.html",
                            linked_mother=linked_mother,
                            mother_info=mother_info,
-                           tips=tips)
+                           tips=tips,
+                           moods=moods,
+                           symptoms=symptoms,
+                           audio_tips=audio_tips)

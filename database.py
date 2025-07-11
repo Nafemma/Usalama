@@ -122,17 +122,18 @@ except Exception as e:
 # MOOD LOGS TABLE
 try:
     sql.execute('''
-        CREATE TABLE IF NOT EXISTS mood_logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            date TEXT,
-            username TEXT,
-            mood TEXT,
-            notes TEXT
-        )
+    CREATE TABLE IF NOT EXISTS mood_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    mood TEXT NOT NULL,
+    notes TEXT,
+    timestamp TEXT DEFAULT (datetime('now'))
+)
     ''')
     print(" 'mood_logs' table created successfully.")
 except Exception as e:
     print(" Error creating 'mood_logs' table:", e)
+
 
 
 # LOGIN ATTEMPTS TABLE
