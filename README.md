@@ -44,9 +44,9 @@ Pregnancy is a beautiful journey, but it also comes with emotional, physical, an
 ## 🚀 How to Get Started
 
 ### Requirements:
-- Python 3.7+
+- Python 3.0
 - Flask web framework
-- SQLite (for mood logs)
+- Json 
 - Basic web browser
 
 ---
